@@ -53,7 +53,7 @@ pipeline {
         stage('Build Frontend Docker Image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKERHUB_USERNAME}/mern-frontend ./mern/frontend"
+                    sh "docker build -t ${DOCKERHUB_USERNAME}/mern-application-frontend ./mern/frontend"
                 }
             }
         }
@@ -61,7 +61,7 @@ pipeline {
         stage('Build Backend Docker Image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKERHUB_USERNAME}/mern-backend ./mern/backend"
+                    sh "docker build -t ${DOCKERHUB_USERNAME}/mern-application-backend ./mern/backend"
                 }
             }
         }
@@ -72,8 +72,8 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-id', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                         sh """
                             echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                            docker push ${DOCKERHUB_USERNAME}/mern-frontend
-                            docker push ${DOCKERHUB_USERNAME}/mern-backend
+                            docker push ${DOCKERHUB_USERNAME}/mern-application-frontend
+                            docker push ${DOCKERHUB_USERNAME}/mern-application-backend
                             docker logout
                         """
                     }
