@@ -4,6 +4,7 @@ WORKDIR /home/app
 
 COPY package*.json ./
 
+RUN npm install react-router-dom
 
 RUN npm ci --only=production --legacy-peer-deps
 
