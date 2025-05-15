@@ -4,6 +4,9 @@ WORKDIR /home/app
 
 COPY package*.json ./
 
+# Install build tools needed by some npm packages
+RUN apk add --no-cache python3 make g++
+
 RUN npm ci --only=production --legacy-peer-deps
 
 COPY . .
