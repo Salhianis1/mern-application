@@ -6,6 +6,9 @@ COPY package*.json ./
 
 RUN npm ci --only=production --legacy-peer-deps
 
+# Install dependencies (including react-router-dom)
+RUN npm install
+
 COPY . .
 
 FROM node:18.17-alpine
